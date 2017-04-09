@@ -8,7 +8,7 @@
 
 import networkx as nx
 import matplotlib.pyplot as plt
-import numpy.random as rand
+import random as rand
 rand.seed(2343)
 
 import general_functions as general_f
