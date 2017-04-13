@@ -5,6 +5,9 @@
 
 import numpy as np
 import scipy.sparse as sparse
+import pickle as pickle
+import os as os
+import networkx as nx
 
 
 class triplet_SM:
@@ -39,3 +42,33 @@ def convert_to_sparse_matrix(triplet_instance):
                               triplet_instance.receivers])),
                              shape=(triplet_instance.length,
                                     triplet_instance.length))
+
+
+pickle_file_name = "dir_graph.p"
+
+
+def save_data_as_pickle(data, path=pickle_file_name):
+    pickle.dump(data, open(path, 'wb'))
+
+
+def open_pickle_of_input_data(path=pickle_file_name):
+    return pickle.load(open(path, 'rb'))
+
+
+def check_if_data_exists_if_not_open_and_read(path=pickle_file_name):
+    if os.path.isfile(path):
+        print "Pickle file already exists, just reading it in."
+        print ""
+        print ""
+        return open_pickle_of_input_data(path)
+    else:
+        print "Pickle file does not exist, now reading in and processing data"
+        print ""
+        print ""
+        data = data_readin()
+        G = nx.DiGraph()
+        temp = [(data.sender_ids[i], data.receiver_ids[i])
+                for i in range(data.length)]
+        G.add_edges_from(temp)
+        save_data_as_pickle(G)
+        return G

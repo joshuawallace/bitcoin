@@ -14,7 +14,7 @@ rand.seed(2343)
 import general_functions as general_f
 
 
-num = 5000
+num = 10000
 
 data = general_f.data_readin()
 
