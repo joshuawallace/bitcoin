@@ -24,4 +24,4 @@ dominating_set = nx.dominating_set(G)
 pos = nx.spring_layout(G, scale=2)
 print "Drawing the dominating set"
 nx.draw(G, pos, font_size=8, node_size=.5, width=0.001)
-plt.savefig("pdf/dominating_set.pdf")
+plt.savefig("../pdf/dominating_set.pdf")
