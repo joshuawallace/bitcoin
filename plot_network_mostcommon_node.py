@@ -9,6 +9,7 @@
 import networkx as nx
 import matplotlib.pyplot as plt
 import general_functions as general_f
+import random as rand
 
 
 num = 10000
@@ -20,11 +21,13 @@ to_plot = [ (data.sender_ids[i], data.receiver_ids[i]) for i in range(data.lengt
 
 G = nx.Graph()
 
+to_plot = rand.sample(to_plot, 10000)
+
 G.add_edges_from(to_plot)
 
 print len(G)
 
 pos = nx.spring_layout(G, scale=2)
-nx.draw(G, pos, font_size=8, node_size=.1, width=0.001)
+nx.draw(G, pos, font_size=8, node_size=.001, width=0.0001)
 
-plt.savefig("../pdf/top_receiver.pdf")
+plt.savefig("../pdf/top_receiver_shortened.pdf")

@@ -28,7 +28,12 @@ G.add_edges_from(temp)
 
 print len(G)
 
+
+
 pos = nx.spring_layout(G, scale=2)
 nx.draw(G, pos, font_size=8, node_size=0, width=0.001)
 
-plt.savefig("temp.pdf")
+fig = plt.gcf()
+fig.set_size_inches(6, 2.7)
+
+fig.savefig("temp.pdf")

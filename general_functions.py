@@ -37,9 +37,9 @@ def convert_to_sparse_matrix(triplet_instance):
         raise TypeError("This function needs a triplet_SM instance")
 
     return sparse.coo_matrix((triplet_instance.numbers,
-                             ([item - 1 for item in triplet_instance.senders],
-                              [item - 1 for item in
-                              triplet_instance.receivers])),
+                             ([item  for item in triplet_instance.sender_ids],
+                              [item  for item in
+                              triplet_instance.receiver_ids])),
                              shape=(triplet_instance.length,
                                     triplet_instance.length))
 
