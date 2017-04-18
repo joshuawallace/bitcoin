@@ -13,27 +13,27 @@ rand.seed(2343)
 
 import general_functions as general_f
 
-
+# Number of transactions to graph
 num = 10000
 
+# Read in the data
 data = general_f.data_readin()
 
+# Pull out "num" number of transactions
 senders_sample, receivers_sample = zip(*rand.sample(list(zip(data.sender_ids, data.receiver_ids)), num))
 
+# Make a graph and add the transactions to it
 G = nx.Graph()
-
 temp = [(senders_sample[i], receivers_sample[i])
         for i in range(num)]
 G.add_edges_from(temp)
-
 print len(G)
-
-
-
 pos = nx.spring_layout(G, scale=2)
 nx.draw(G, pos, font_size=8, node_size=0, width=0.001)
 
+# Figure set up
 fig = plt.gcf()
 fig.set_size_inches(6, 2.7)
 
-fig.savefig("temp.pdf")
+# Save figure
+fig.savefig("fig1.pdf")
