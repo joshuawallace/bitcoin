@@ -12,6 +12,17 @@ import networkx as nx
 # A class to store the sender, receiver, and number of transactions are stored
 class triplet_SM:
     def __init__(self, senders, receivers, numbers_):
+        """The initializing function
+
+        Arguments:
+            senders {list} -- the sender addresses
+            receivers {[list} -- the corresponding receiver addresses
+            numbers_ {list} -- number of transactions between the two addresses
+        
+        Raises:
+            RuntimeError -- lists don't have same length
+            RuntimeError -- at least one variable has no length
+        """
         try:
             if len(senders) != len(receivers) or len(receivers) != len(numbers_):
                 raise RuntimeError("The lists passed to triplet_SM class are not the same length")
@@ -26,6 +37,14 @@ class triplet_SM:
         
 # Read in the data, save in a triple_SM instance
 def data_readin(filename="../data/txTripletsCounts.txt"):
+    """Read in the data
+    
+    Keyword Arguments:
+        filename {str} -- path to the filename (default: {"../data/txTripletsCounts.txt"})
+    
+    Returns:
+        triplet_SM instance -- the data in triplet form
+    """
     data = np.loadtxt(filename, unpack=True)
     return triplet_SM([int(item) for item in data[0]],
                       [int(item) for item in data[1]],
@@ -34,6 +53,17 @@ def data_readin(filename="../data/txTripletsCounts.txt"):
 
 # Convert a triple_SM instance to a sparse matrix
 def convert_to_sparse_matrix(triplet_instance):
+    """Converts a triplet_SM instance to a sparse matrix
+
+    Arguments:
+        triplet_instance {triplet_SM instance} -- the data in triple form
+    
+    Returns:
+        sparse matrix -- the data in sparse matrix form
+    
+    Raises:
+        TypeError -- input data is not a triplet_SM instance
+    """
     if not isinstance(triplet_instance, triplet_SM):
         raise TypeError("This function needs a triplet_SM instance")
 
@@ -61,6 +91,15 @@ def open_pickle_of_input_data(path=pickle_file_name):
 
 # Check whether the pickle file exists and, if not, create it and read it in
 def check_if_data_exists_if_not_open_and_read(path=pickle_file_name):
+    """Check if the pickle file exists.  If not, read in data and create it.
+       Then return the data in a networkx.DiGraph() form
+
+    Keyword Arguments:
+        path {str} -- path to the pickle file (default: {pickle_file_name})
+    
+    Returns:
+        networkx.DiGraph -- a DiGraph instance, the data in directional graphical form.
+    """
     if os.path.isfile(path):
         print "Pickle file already exists, just reading it in."
         print ""
